@@ -2,6 +2,9 @@
   "name": "@kriszu/utils",
   "type": "module",
   "version": "0.0.2",
+  "publishConfig": {
+    "access": "public"
+  },
   "packageManager": "pnpm@7.0.1",
   "description": "Opinionated collection of common JavaScript / TypeScript utils",
   "author": "WSZ",
