@@ -181,7 +181,6 @@ export function isArray(val: any): val is Array<any> {
  * @category is
  */
 export function isWindow(val: any): boolean {
-  // @ts-expect-error
   return typeof window !== 'undefined' && is(val, 'Window')
 }
 
@@ -205,7 +204,7 @@ export function isMap(val: unknown): val is Map<any, any> {
   return is(val, 'Map')
 }
 
-// @ts-expect-error
+
 export const isServer = typeof window === 'undefined'
 
 export const isClient = !isServer
