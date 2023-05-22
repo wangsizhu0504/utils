@@ -13,7 +13,7 @@ export type Arrayable<T> = T | Array<T>
  */
 export type Fn<T = void> = () => T
 
-export type Recordable<T> = Record<string, T>
+export type Recordable<T = any> = Record<string, T>
 
 export interface ReadonlyRecordable<T = any> {
   readonly [key: string]: T
