@@ -47,7 +47,7 @@
     "bumpp": "^9.1.0",
     "eslint": "^8.39.0",
     "esno": "^0.17.0",
-    "rollup": "^3.21.0",
+    "rollup": "^4.0.0",
     "rollup-plugin-dts": "^6.0.0",
     "rollup-plugin-esbuild": "^6.0.0",
     "typescript": "^5.0.4",
