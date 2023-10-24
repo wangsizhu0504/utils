@@ -43,7 +43,7 @@
     "@rollup/plugin-commonjs": "^25.0.0",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.0.2",
-    "@types/node": "^18.16.0",
+    "@types/node": "^20.0.0",
     "bumpp": "^9.1.0",
     "eslint": "^8.39.0",
     "esno": "^0.17.0",
