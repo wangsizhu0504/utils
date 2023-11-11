@@ -46,7 +46,7 @@
     "@types/node": "^18.16.0",
     "bumpp": "^9.1.0",
     "eslint": "^8.39.0",
-    "esno": "^0.17.0",
+    "esno": "^4.0.0",
     "rollup": "^4.0.0",
     "rollup-plugin-dts": "^6.0.0",
     "rollup-plugin-esbuild": "^6.0.0",
