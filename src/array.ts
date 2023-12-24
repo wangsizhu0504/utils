@@ -8,7 +8,7 @@ function clamp(n: number, min: number, max: number) {
  *
  * @category Array
  */
-export function toArray<T>(array?: Nullable<Arrayable<T>>): Array<T> {
+export function toArray<T>(array?: Nullable<Arrayable<T>>): T[] {
   array = array ?? []
   return Array.isArray(array) ? array : [array]
 }
@@ -18,8 +18,8 @@ export function toArray<T>(array?: Nullable<Arrayable<T>>): Array<T> {
  *
  * @category Array
  */
-export function flattenArrayable<T>(array?: Nullable<Arrayable<T | Array<T>>>): Array<T> {
-  return toArray(array).flat(1) as Array<T>
+export function flattenArrayable<T>(array?: Nullable<Arrayable<T | T[]>>): T[] {
+  return toArray(array).flat(1) as T[]
 }
 
 /**
@@ -27,7 +27,7 @@ export function flattenArrayable<T>(array?: Nullable<Arrayable<T | Array<T>>>): 
  *
  * @category Array
  */
-export function mergeArrayable<T>(...args: Nullable<Arrayable<T>>[]): Array<T> {
+export function mergeArrayable<T>(...args: Array<Nullable<Arrayable<T>>>): T[] {
   return args.flatMap(i => toArray(i))
 }
 
