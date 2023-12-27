@@ -29,6 +29,6 @@ const reIsNative = RegExp(
  * isNative(isDate)
  * // => false
  */
-export function isNative(value: any) {
-  return isObject(value) && reIsNative.test(value)
+export function isNative(value: any): value is (...args: any[]) => any {
+  return isObject(value) && reIsNative.test(value as any)
 }

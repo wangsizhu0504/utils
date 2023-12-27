@@ -46,7 +46,8 @@ export const isArray = Array.isArray
  * isArrayLike(Function)
  * // => false
  */
-export function isArrayLike(value: any): boolean {
+
+export function isArrayLike<T>(value?: any): value is T[] {
   return value != null && typeof value !== 'function' && isLength(value.length)
 }
 
@@ -72,6 +73,6 @@ export function isArrayLike(value: any): boolean {
  * isArrayLikeObject(Function)
  * // => false
  */
-export function isArrayLikeObject(value: unknown): boolean {
+export function isArrayLikeObject<T>(value?: any): value is T[] {
   return isObjectLike(value) && isArrayLike(value)
 }

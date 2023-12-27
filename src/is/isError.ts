@@ -17,7 +17,7 @@ import { isPlainObject } from './isPlainObject'
  * isError(Error)
  * // => false
  */
-function isError(value: any): value is Error {
+export function isError(value: any): value is Error {
   if (!isObjectLike(value))
     return false
 
@@ -30,5 +30,3 @@ function isError(value: any): value is Error {
             && !isPlainObject(value))
   )
 }
-
-export default isError

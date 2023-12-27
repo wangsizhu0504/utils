@@ -15,6 +15,6 @@ import { isObjectLike } from './isObject'
  * isArguments([1, 2, 3])
  * // => false
  */
-export function isArguments(value: unknown): boolean {
+export function isArguments(value: any): boolean {
   return isObjectLike(value) && toTypeString(value) === '[object Arguments]'
 }

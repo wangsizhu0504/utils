@@ -19,6 +19,9 @@ const nodeIsRegExp = getNodeUtil && getNodeUtil.isRegExp
  * isRegExp('/abc/')
  * // => false
  */
-export const isRegExp = nodeIsRegExp
-  ? (value: any) => nodeIsRegExp(value)
-  : (value: any) => isObjectLike(value) && toTypeString(value) === '[object RegExp]'
+export function isRegExp(value?: any): value is RegExp {
+  if (nodeIsRegExp)
+    return nodeIsRegExp(value)
+  else
+    return isObjectLike(value) && toTypeString(value) === '[object RegExp]'
+}

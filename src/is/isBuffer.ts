@@ -41,4 +41,9 @@ const nativeIsBuffer = root?.Buffer?.isBuffer
  * isBuffer(new Uint8Array(2))
  * // => false
  */
-export const isBuffer = typeof nativeIsBuffer === 'function' ? nativeIsBuffer : () => false
+export function isBuffer(value: any): boolean {
+  if (typeof nativeIsBuffer === 'function')
+    return nativeIsBuffer(value)
+  else
+    return false
+}

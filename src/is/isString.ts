@@ -14,7 +14,7 @@ import toTypeString from '../_internal/toTypeString'
  * isString(1)
  * // => false
  */
-export function isString(value: any) {
+export function isString(value?: any): value is string {
   const type = typeof value
   return (
     type === 'string'

@@ -14,7 +14,7 @@ import toTypeString from '../_internal/toTypeString'
  * isSymbol('abc')
  * // => false
  */
-export function isSymbol(value: any) {
+export function isSymbol(value: any): value is symbol {
   const type = typeof value
   return (
     type === 'symbol'

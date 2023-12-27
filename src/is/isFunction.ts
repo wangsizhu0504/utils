@@ -24,6 +24,6 @@
  * isFunction(/abc/)
  * // => false
  */
-export function isFunction(value: unknown): boolean {
+export function isFunction(value: any): value is (...args: any[]) => any {
   return typeof value === 'function'
 }

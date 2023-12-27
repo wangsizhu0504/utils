@@ -20,7 +20,7 @@
  * isObject(null)
  * // => false
  */
-export function isObject(value: unknown): boolean {
+export function isObject(value?: any): value is object {
   const type = typeof value
   return value != null && (type === 'object' || type === 'function')
 }
@@ -45,6 +45,6 @@ export function isObject(value: unknown): boolean {
  * isObjectLike(null)
  * // => false
  */
-export function isObjectLike(value: unknown): boolean {
+export function isObjectLike(value?: any): boolean {
   return typeof value === 'object' && value !== null
 }

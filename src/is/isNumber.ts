@@ -25,8 +25,10 @@ import { isObjectLike } from './isObject'
  * isNumber('3')
  * // => false
  */
-export function isNumber(value: any) {
+export function isNumber(value?: any): value is number {
   return (
-    typeof value === 'number' || (isObjectLike(value) && toTypeString(value) === '[object Number]')
+    typeof value === 'number'
+    || (isObjectLike(value)
+    && toTypeString(value) === '[object Number]')
   )
 }

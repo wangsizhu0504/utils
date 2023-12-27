@@ -20,6 +20,9 @@ const nodeIsSet = getNodeUtil && getNodeUtil.isSet
  * isSet(new WeakSet)
  * // => false
  */
-export const isSet = nodeIsSet
-  ? (value: any) => nodeIsSet(value)
-  : (value: any) => isObjectLike(value) && toTypeString(value) === '[object Set]'
+export function isSet(value?: any): value is Set<any> {
+  if (nodeIsSet)
+    return nodeIsSet(value)
+  else
+    return isObjectLike(value) && toTypeString(value) === '[object Set]'
+}

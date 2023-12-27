@@ -23,6 +23,9 @@ const nodeIsTypedArray = getNodeUtil && getNodeUtil.isTypedArray
  * isTypedArray([])
  * // => false
  */
-export const isTypedArray = nodeIsTypedArray
-  ? (value: any) => nodeIsTypedArray(value)
-  : (value: any) => isObjectLike(value) && reTypedTag.test(toTypeString(value))
+export function isTypedArray(value: any): boolean {
+  if (nodeIsTypedArray)
+    return nodeIsTypedArray(value)
+  else
+    return isObjectLike(value) && reTypedTag.test(toTypeString(value))
+}

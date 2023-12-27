@@ -19,6 +19,9 @@ const nodeIsDate = getNodeUtil && getNodeUtil.isDate
  * isDate('Mon April 23 2012')
  * // => false
  */
-export const isDate = nodeIsDate
-  ? (value: any) => nodeIsDate(value)
-  : (value: any) => isObjectLike(value) && toTypeString(value) === '[object Date]'
+export function isDate(value?: any): value is Date {
+  if (nodeIsDate)
+    return nodeIsDate(value)
+  else
+    return isObjectLike(value) && toTypeString(value) === '[object Date]'
+}

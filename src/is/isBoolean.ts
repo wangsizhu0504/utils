@@ -14,7 +14,7 @@ import toTypeString from '../_internal/toTypeString'
  * isBoolean(null)
  * // => false
  */
-export function isBoolean(value: unknown): boolean {
+export function isBoolean(value: any): value is boolean {
   return (
     value === true
     || value === false

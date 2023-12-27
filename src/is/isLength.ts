@@ -21,6 +21,6 @@
  * isLength('3')
  * // => false
  */
-export function isLength(value: unknown): boolean {
+export function isLength(value?: any): boolean {
   return typeof value === 'number' && value > -1 && value % 1 === 0 && value <= Number.MAX_SAFE_INTEGER
 }

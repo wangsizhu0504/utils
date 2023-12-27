@@ -15,6 +15,6 @@ import { isPlainObject } from './isPlainObject'
  * isElement('<body>')
  * // => false
  */
-export function isElement(value: any): boolean {
+export function isElement(value?: any): boolean {
   return isObjectLike(value) && value.nodeType === 1 && !isPlainObject(value)
 }

@@ -19,6 +19,9 @@ const nodeIsMap = getNodeUtil && getNodeUtil.isMap
  * isMap(new WeakMap)
  * // => false
  */
-export const isMap = nodeIsMap
-  ? (value: unknown): boolean => nodeIsMap(value)
-  : (value: unknown): boolean => isObjectLike(value) && toTypeString(value) === '[object Map]'
+export function isMap(value?: any): value is Map<any, any> {
+  if (nodeIsMap)
+    return nodeIsMap(value)
+  else
+    return isObjectLike(value) && toTypeString(value) === '[object Map]'
+}
