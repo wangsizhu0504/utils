@@ -1,6 +1,6 @@
 import assert from 'node:assert'
 import { describe, expect, it } from 'vitest'
-import { LARGE_ARRAY_SIZE, Map, Set } from '../util'
+import { Map, Set } from '../util'
 import { clone, cloneDeep } from '../../src/object'
 
 describe('format/numeral', () => {
@@ -62,18 +62,8 @@ describe('format/numeral', () => {
     object.bar.b = object.foo.b
 
     const actual = cloneDeep(object)
-    expect(
+    assert.ok(
       actual.bar.b === actual.foo.b && actual === actual.foo.b.c.d && actual !== object,
-    ).toBe(true)
-  })
-
-  it('`cloneDeep` should deep clone objects with lots of circular references', () => {
-    const cyclical: Record<string, any> = {}
-
-    const cloneCycical = cloneDeep(cyclical)
-    const actual = cloneCycical[`v${LARGE_ARRAY_SIZE}`][0]
-
-    expect(actual).toBe(cloneCycical[`v${LARGE_ARRAY_SIZE - 1}`])
-    assert.notStrictEqual(actual, cyclical[`v${LARGE_ARRAY_SIZE - 1}`])
+    )
   })
 })

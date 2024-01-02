@@ -21,6 +21,7 @@ describe('format/numeral', () => {
       expect(typeof numeral(tests[i][0]).value()).to.equal(tests[i][1])
   })
   it('should return a value', () => {
+    numeral.reset()
     const tests = [
       [1000, 1000],
       [0.5, 0.5],
@@ -87,6 +88,7 @@ describe('format/numeral', () => {
       expect(numeral.isNumeral(test[0])).to.equal(test[1])
   })
   it('should format to a number', () => {
+    numeral.reset()
     const tests = [
       [0, null, '0'],
       [0, '0.00', '0.00'],
@@ -149,15 +151,13 @@ describe('format/numeral', () => {
       [123456, '0.0[0] ak', '123.46 k'],
       [150, '0.0 ak', '0.2 k'],
     ]
-    let i
     let n
     let output
 
-    for (i = 0; i < tests.length; i++) {
-      n = numeral(tests[i][0])
-      output = n.format(tests[i][1])
-
-      expect(output).to.equal(tests[i][2])
+    for (const test of tests) {
+      n = numeral(test[0])
+      output = n.format(test[1])
+      expect(output).to.equal(test[2])
 
       expect(typeof output).to.equal('string')
     }

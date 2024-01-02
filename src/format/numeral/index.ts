@@ -1,8 +1,8 @@
-import type { INumeralImplements } from './type'
+import type { INumeralImplements, NumeralAbbreviations, NumeralLocales } from './type'
 import { correctionFactor, reduce, toFixed } from './helper'
 
 const formats: Record<string, any> = {}
-const locales: Record<string, any> = {}
+const locales: NumeralLocales = {}
 const defaults: Record<string, any> = {
   currentLocale: 'en',
   zeroFormat: null,
@@ -10,7 +10,7 @@ const defaults: Record<string, any> = {
   defaultFormat: '0,0',
   scalePercentBy100: true,
 }
-const options: any = {
+const options: Record<string, any> = {
   currentLocale: defaults.currentLocale,
   zeroFormat: defaults.zeroFormat,
   nullFormat: defaults.nullFormat,
@@ -75,6 +75,7 @@ class Numeral implements INumeralImplements {
   ) {
     const value = this._value
     const format = inputString || options.defaultFormat
+
     let kind
     let output
     let formatFunction
@@ -296,7 +297,7 @@ numeral.numberToFormat = function (
   format: any,
   roundingFunction: () => void,
 ) {
-  const locale = locales[this.options.currentLocale]
+  const locale = locales[numeral.options.currentLocale]
   let negP = false
   let optDec = false
   let leadingCount = 0
@@ -450,7 +451,7 @@ numeral.stringToNumber = function (string: string) {
     billion: 9,
     trillion: 12,
   }
-  let abbreviation
+  let abbreviation: keyof NumeralAbbreviations
   let value
   let regexp
 
@@ -477,7 +478,7 @@ numeral.stringToNumber = function (string: string) {
       )
 
       if (stringOriginal.match(regexp)) {
-        value *= 10 ** abbreviations[abbreviation as keyof typeof abbreviations]
+        value *= 10 ** abbreviations[abbreviation]
         break
       }
     }

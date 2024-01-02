@@ -10,3 +10,27 @@ export interface INumeralImplements {
   divide?: (value: any) => any;
   difference?: (value: any) => any;
 }
+
+export interface NumeralLocales {
+  [id: string]: NumeralLocale;
+}
+
+// http://numeraljs.com/#locales
+export interface NumeralLocale {
+  currency: {
+    symbol: string;
+  };
+  delimiters: {
+    thousands: string;
+    decimal: string;
+  };
+  abbreviations: NumeralAbbreviations;
+  ordinal(num: number): string;
+}
+
+export interface NumeralAbbreviations {
+  thousand: string;
+  million: string;
+  billion: string;
+  trillion: string;
+}
