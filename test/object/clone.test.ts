@@ -44,7 +44,7 @@ describe('format/numeral', () => {
 
   objects.arrays.length = 3
 
-  it('`_.clone` should perform a shallow clone', () => {
+  it('`clone` should perform a shallow clone', () => {
     const array = [{ a: 0 }, { b: 1 }]
     const actual = clone(array)
 
@@ -52,7 +52,7 @@ describe('format/numeral', () => {
     expect(actual !== array && actual[0] === array[0])
   })
 
-  it('`_.cloneDeep` should deep clone objects with circular references', () => {
+  it('`cloneDeep` should deep clone objects with circular references', () => {
     const object = {
       foo: { b: { c: { d: {} } } },
       bar: {} as any,
@@ -67,7 +67,7 @@ describe('format/numeral', () => {
     ).toBe(true)
   })
 
-  it('`_.cloneDeep` should deep clone objects with lots of circular references', () => {
+  it('`cloneDeep` should deep clone objects with lots of circular references', () => {
     const cyclical: Record<string, any> = {}
 
     const cloneCycical = cloneDeep(cyclical)

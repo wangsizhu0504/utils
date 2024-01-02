@@ -1,10 +1,9 @@
 import toTypeString from '../_internal/toTypeString'
 
 import { isArguments } from './isArguments'
-import { isArray, isArrayLike } from './isArray'
+import { isArray, isArrayLike, isTypedArray } from './isArray'
 import { isBuffer } from './isBuffer'
 import { isPrototype } from './isPrototype'
-import { isTypedArray } from './isTypeArray'
 
 type EmptyObject<T> = { [K in keyof T]?: never }
 type EmptyObjectOf<T> = EmptyObject<T> extends T ? EmptyObject<T> : never

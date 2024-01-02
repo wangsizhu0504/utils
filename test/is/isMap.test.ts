@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { isMap } from '../../src'
 import { args, map, slice, symbol, weakMap } from '../util'
 
-describe('isLength', () => {
+describe('isMap', () => {
   it('should return `true` for maps', () => {
     if (Map)
       expect(isMap(map)).toBe(true)
