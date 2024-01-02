@@ -6,5 +6,6 @@ export default Kriszu({
     'no-new-func': 'off',
     'ts/ban-types': 'off',
     'node/prefer-global/buffer': 'off',
+    'prefer-rest-params': 'off',
   },
 })

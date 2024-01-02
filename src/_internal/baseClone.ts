@@ -83,7 +83,7 @@ const allocUnsafe = Buffer ? Buffer.allocUnsafe : undefined
  * @param {boolean} [isDeep] Specify a deep clone.
  * @returns {Buffer} Returns the cloned buffer.
  */
-// eslint-disable-next-line node/prefer-global/buffer
+
 export function cloneBuffer(buffer: Buffer, isDeep: boolean): Buffer {
   if (isDeep)
     return buffer.slice()
@@ -361,7 +361,7 @@ export function baseClone(
     const isFunc = typeof value === 'function'
 
     if (isBuffer(value))
-      return cloneBuffer(value, isDeep as unknown as boolean)
+      return cloneBuffer(value as Buffer, isDeep as unknown as boolean)
 
     if (tag === objectTag || tag === argsTag || (isFunc && !object)) {
       result = (isFlat || isFunc) ? {} : initCloneObject(value)
@@ -381,21 +381,21 @@ export function baseClone(
   if (!stack)
     stack = new Stack()
 
-  const stacked = stack.get(value)
+  const stacked = stack.get(value as any)
   if (stacked)
     return stacked
 
-  stack.set(value, result)
+  stack.set(value as any, result)
 
   if (tag === mapTag) {
-    value.forEach((subValue: any, _key: any) => {
+    (value as Map<any, any>).forEach((subValue: any, _key: any) => {
       result.set(_key, baseClone(subValue, bitmask, customizer, _key, value, stack))
     })
     return result
   }
 
   if (tag === setTag) {
-    value.forEach((subValue: any) => {
+    (value as Set<any>).forEach((subValue: any) => {
       result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack))
     })
     return result
@@ -409,9 +409,10 @@ export function baseClone(
     : (isFlat ? keysIn : keys)
 
   const props = isArr ? undefined : keysFunc(value)
-  arrayEach(props || value, (subValue: any, _key: any) => {
+  arrayEach((props || value) as any, (subValue: any, _key: any) => {
     if (props) {
       _key = subValue
+      // @ts-expect-error
       subValue = value[_key]
     }
     // Recursively populate clone (susceptible to call stack limits).

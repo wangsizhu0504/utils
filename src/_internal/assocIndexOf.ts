@@ -1,4 +1,4 @@
-import { eq } from '../lang/eq'
+import { eq } from '../object/eq'
 
 /**
  * Gets the index at which the `key` is found in `array` of key-value pairs.

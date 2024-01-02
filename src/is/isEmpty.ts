@@ -50,7 +50,6 @@ export function isEmpty(value: string): value is ''
 export function isEmpty(value: Map<any, any> | Set<any> | ArrayLike<any> | null | undefined): boolean
 export function isEmpty(value: object): boolean
 export function isEmpty<T extends object>(value: T | null | undefined): value is EmptyObjectOf<T> | null | undefined
-export function isEmpty(value: any): boolean
 export function isEmpty(value?: any): boolean {
   if (value == null)
     return true
@@ -59,7 +58,7 @@ export function isEmpty(value?: any): boolean {
     isArrayLike(value)
     && (
       isArray(value)
-      || typeof value.splice === 'function'
+      || typeof (value as any).splice === 'function'
       || typeof value === 'string'
       || isBuffer(value)
       || isTypedArray(value)

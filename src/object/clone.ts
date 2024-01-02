@@ -1,6 +1,8 @@
 import baseClone from '../_internal/baseClone'
 
 /** Used to compose bitmasks for cloning. */
+const CLONE_DEEP_FLAG = 1
+/** Used to compose bitmasks for cloning. */
 const CLONE_SYMBOLS_FLAG = 4
 
 /**
@@ -15,7 +17,7 @@ const CLONE_SYMBOLS_FLAG = 4
  * returned for uncloneable values such as error objects, functions, DOM nodes,
  * and WeakMaps.
  *
- * @category Is
+ * @category Object
  * @param {*} value The value to clone.
  * @returns {*} Returns the cloned value.
  * @see cloneDeep
@@ -27,6 +29,27 @@ const CLONE_SYMBOLS_FLAG = 4
  * console.log(shallow[0] === objects[0])
  * // => true
  */
-export function clone(value: any): any {
+export function clone<T = any>(value: T): T {
   return baseClone(value, CLONE_SYMBOLS_FLAG)
+}
+
+/**
+ * This method is like `clone` except that it recursively clones `value`.
+ * Object inheritance is preserved.
+ *
+ * @since 1.0.0
+ * @category Lang
+ * @param {*} value The value to recursively clone.
+ * @returns {*} Returns the deep cloned value.
+ * @see clone
+ * @example
+ *
+ * const objects = [{ 'a': 1 }, { 'b': 2 }]
+ *
+ * const deep = cloneDeep(objects)
+ * console.log(deep[0] === objects[0])
+ * // => false
+ */
+export function cloneDeep<T = any>(value: T): T {
+  return baseClone(value, CLONE_DEEP_FLAG | CLONE_SYMBOLS_FLAG)
 }

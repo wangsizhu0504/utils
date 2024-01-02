@@ -4,7 +4,6 @@
 
 Opinionated collection of common JavaScript / TypeScript utils.
 
-
 ## License
 
 [MIT](./LICENSE) License © 2023 [WSZ](https://github.com/wangsizhu0504)

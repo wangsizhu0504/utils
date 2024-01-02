@@ -3,7 +3,7 @@
  * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
  * comparison between two values to determine if they are equivalent.
  *
- * @category Is
+ * @category Object
  * @param {*} value The value to compare.
  * @param {*} other The other value to compare.
  * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
@@ -27,7 +27,7 @@
  * eq(NaN, NaN)
  * // => true
  */
-export function eq(value: any, other: any) {
+export function eq(value: any, other: any): boolean {
   // eslint-disable-next-line no-self-compare
   return value === other || (value !== value && other !== other)
 }

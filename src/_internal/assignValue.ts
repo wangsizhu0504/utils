@@ -1,4 +1,4 @@
-import { eq } from '../lang/eq'
+import { eq } from '../object/eq'
 
 /** Used to check objects for own properties. */
 const hasOwnProperty = Object.prototype.hasOwnProperty

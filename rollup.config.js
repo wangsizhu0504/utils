@@ -30,12 +30,17 @@ export default [
     input,
     output: [
       {
-        file: input.replace('src/', 'dist/').replace('.ts', '.mjs'),
-        format: 'esm',
+        // file: input.replace('src/', 'dist/').replace('.ts', '.mjs'),
+        dir: 'dist/es/',
+        format: 'es',
+        preserveModules: true,
       },
       {
-        file: input.replace('src/', 'dist/').replace('.ts', '.cjs'),
+        // file: input.replace('src/', 'dist/').replace('.ts', '.cjs'),
+        dir: 'dist/cjs/',
         format: 'cjs',
+        exports: 'named',
+        preserveModules: true,
       },
     ],
     external: [],
@@ -47,7 +52,6 @@ export default [
       file: input.replace('src/', 'dist/').replace('.ts', '.d.ts'),
       format: 'esm',
     },
-    external: [],
     plugins: [
       dts({ respectExternal: true }),
     ],

@@ -1,1 +1,1 @@
-export type List<T> = ArrayLike<T>
+export type * from './alias'

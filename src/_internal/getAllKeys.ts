@@ -1,4 +1,4 @@
-import { keys } from '../object'
+import { keys } from '../object/keys'
 import { getSymbols, getSymbolsIn } from './getSymbols'
 
 /**
@@ -8,7 +8,7 @@ import { getSymbols, getSymbolsIn } from './getSymbols'
  * @param {object} object The object to query.
  * @returns {Array} Returns the array of property names and symbols.
  */
-export function getAllKeys(object: Record<string, any>) {
+export function getAllKeys(object: Record<string, any>): any[] {
   const result = keys(object)
   if (!Array.isArray(object))
     result.push(...getSymbols(object))

@@ -2,6 +2,8 @@
 /* eslint-disable */
 // @ts-nocheck
 
+/** Used as the size to cover large array optimizations. */
+export const LARGE_ARRAY_SIZE = 200;
 /** Used as a reference to the global object. */
 const root = (typeof global === 'object' && global) || this;
 export const ArrayBuffer = root.ArrayBuffer;
