@@ -1,28 +1,21 @@
-import toTypeString from '../_internal/toTypeString'
-
 /**
- * Checks if `value` is classified as a `String` primitive or object.
+ * Checks if a given value is string.
  *
- * @category Is
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a string, else `false`.
+ * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `string`.
+ *
+ * @param {unknown} value The value to check if it is string.
+ * @returns {value is string} Returns `true` if `value` is a string, else `false`.
+ *
  * @example
+ * const value1 = 'abc';
+ * const value2 = 123;
+ * const value3 = true;
  *
- * isString('abc')
- * // => true
- *
- * isString(1)
- * // => false
+ * console.log(isString(value1)); // true
+ * console.log(isString(value2)); // false
+ * console.log(isString(value3)); // false
  */
-export function isString(value?: any): value is string {
-  const type = typeof value
-  return (
-    type === 'string'
-    || (
-      type === 'object'
-        && value != null
-        && !Array.isArray(value)
-        && toTypeString(value) === '[object String]'
-    )
-  )
+
+export function isString(value: unknown): value is string {
+  return typeof value === 'string';
 }

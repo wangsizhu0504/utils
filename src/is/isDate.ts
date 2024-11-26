@@ -1,27 +1,17 @@
-import getNodeUtil from '../_internal/getNodeUtil'
-import toTypeString from '../_internal/toTypeString'
-import { isObjectLike } from './isObject'
-
-/* Node.js helper references. */
-const nodeIsDate = getNodeUtil && getNodeUtil.isDate
-
 /**
- * Checks if `value` is classified as a `Date` object.
+ * Checks if `value` is a Date object.
  *
  * @category Is
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a date object, else `false`.
+ * @param {unknown} value The value to check.
+ * @returns {value is Date} Returns `true` if `value` is a Date object, `false` otherwise.
+ *
  * @example
+ * const value1 = new Date();
+ * const value2 = '2024-01-01';
  *
- * isDate(new Date)
- * // => true
- *
- * isDate('Mon April 23 2012')
- * // => false
+ * console.log(isDate(value1)); // true
+ * console.log(isDate(value2)); // false
  */
-export function isDate(value?: any): value is Date {
-  if (nodeIsDate)
-    return nodeIsDate(value)
-  else
-    return isObjectLike(value) && toTypeString(value) === '[object Date]'
+export function isDate(value: unknown): value is Date {
+  return value instanceof Date;
 }

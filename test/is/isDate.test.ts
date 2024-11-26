@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
-import { args, symbol } from '../util'
 import { isDate } from '../../src'
+import { args, symbol } from '../util'
 
 describe('isDate', () => {
   it('should return `true` for array buffers', () => {

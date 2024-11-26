@@ -1,27 +1,26 @@
-import toTypeString from '../_internal/toTypeString'
-
 /**
- * Checks if `value` is classified as a `Symbol` primitive or object.
+ * Check whether a value is a symbol.
  *
- * @category Is
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `symbol`.
+ *
+ * @param {unknown} value The value to check.
+ * @returns {value is symbol} Returns `true` if `value` is a symbol, else `false`.
+ *
  * @example
+ * import { isSymbol } from 'es-toolkit/predicate';
  *
- * isSymbol(Symbol.iterator)
- * // => true
+ * isSymbol(Symbol('a')); // true
+ * isSymbol(Symbol.for('a')); // true
+ * isSymbol(Symbol.iterator); // true
  *
- * isSymbol('abc')
- * // => false
+ * isSymbol(null); // false
+ * isSymbol(undefined); // false
+ * isSymbol('123'); // false
+ * isSymbol(false); // false
+ * isSymbol(123n); // false
+ * isSymbol({}); // false
+ * isSymbol([1, 2, 3]); // false
  */
-export function isSymbol(value: any): value is symbol {
-  const type = typeof value
-  return (
-    type === 'symbol'
-    || (
-      type === 'object'
-      && value != null
-      && toTypeString(value) === '[object Symbol]'
-    )
-  )
+export function isSymbol(value: unknown): value is symbol {
+  return typeof value === 'symbol';
 }

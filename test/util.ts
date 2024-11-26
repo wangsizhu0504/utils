@@ -46,7 +46,6 @@ export const weakSet = WeakSet ? new WeakSet() : undefined;
 export const slice = arrayProto.slice;
 export const asyncFunc = async () => {}
 export const genFunc =  () => {}
-export const noop = function () {};
 export const strictArgs = (function () {
   'use strict'
 

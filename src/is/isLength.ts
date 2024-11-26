@@ -1,26 +1,24 @@
 /**
- * Checks if `value` is a valid array-like length.
+ * Checks if a given value is a valid length.
  *
- * **Note:** This method is loosely based on
- * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+ * A valid length is of type `number`, is a non-negative integer, and is less than or equal to
+ * JavaScript's maximum safe integer (`Number.MAX_SAFE_INTEGER`).
+ * It returns `true` if the value is a valid length, and `false` otherwise.
  *
- * @category Is
- * @param {*} value The value to check.
+ * This function can also serve as a type predicate in TypeScript, narrowing the type of the
+ * argument to a valid length (`number`).
+ *
+ * @param {unknown} value The value to check.
  * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+ *
  * @example
- *
- * isLength(3)
- * // => true
- *
- * isLength(Number.MIN_VALUE)
- * // => false
- *
- * isLength(Infinity)
- * // => false
- *
- * isLength('3')
- * // => false
+ * isLength(0); // true
+ * isLength(42); // true
+ * isLength(-1); // false
+ * isLength(1.5); // false
+ * isLength(Number.MAX_SAFE_INTEGER); // true
+ * isLength(Number.MAX_SAFE_INTEGER + 1); // false
  */
-export function isLength(value?: any): boolean {
-  return typeof value === 'number' && value > -1 && value % 1 === 0 && value <= Number.MAX_SAFE_INTEGER
+export function isLength(value: unknown): value is number {
+  return Number.isSafeInteger(value) && (value as number) >= 0;
 }

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { isArrayBuffer } from '../../src'
-import { ArrayBuffer, args, arrayBuffer, symbol } from '../util'
+import { args, ArrayBuffer, arrayBuffer, symbol } from '../util'
 
 describe('isArrayBuffer', () => {
   it('should return `true` for array buffers', () => {

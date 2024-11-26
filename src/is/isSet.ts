@@ -1,28 +1,21 @@
-import getNodeUtil from '../_internal/getNodeUtil'
-import toTypeString from '../_internal/toTypeString'
-
-import { isObjectLike } from './isObject'
-
-/* Node.js helper references. */
-const nodeIsSet = getNodeUtil && getNodeUtil.isSet
-
 /**
- * Checks if `value` is classified as a `Set` object.
+ * Checks if a given value is `Set`.
  *
- * @category Is
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a set, else `false`.
+ * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `Set`.
+ *
+ * @param {unknown} value The value to check if it is a `Set`.
+ * @returns {value is Set<any>} Returns `true` if `value` is a `Set`, else `false`.
+ *
  * @example
+ * const value1 = new Set();
+ * const value2 = new Map();
+ * const value3 = new WeakSet();
  *
- * isSet(new Set)
- * // => true
- *
- * isSet(new WeakSet)
- * // => false
+ * console.log(isSet(value1)); // true
+ * console.log(isSet(value2)); // false
+ * console.log(isSet(value3)); // false
  */
-export function isSet(value?: any): value is Set<any> {
-  if (nodeIsSet)
-    return nodeIsSet(value)
-  else
-    return isObjectLike(value) && toTypeString(value) === '[object Set]'
+
+export function isSet(value: unknown): value is Set<any> {
+  return value instanceof Set;
 }

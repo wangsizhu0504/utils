@@ -1,13 +1,19 @@
 {
   "compilerOptions": {
-    "target": "ES2021",
-    "lib": ["ESNext", "dom"],
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
+    "target": "es2016",
     "strict": true,
-    "strictNullChecks": true,
+    "declaration": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "downlevelIteration": true,
+    "resolveJsonModule": true,
+    "jsx": "preserve",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "outDir": "./lib"
   }
 }

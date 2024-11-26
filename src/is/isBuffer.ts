@@ -1,49 +1,28 @@
-import getNodeUtil from '../_internal/getNodeUtil'
-import toTypeString from '../_internal/toTypeString'
-import root from '../_internal/root'
-import { isObjectLike } from './isObject'
-
-/* Node.js helper references. */
-const nodeIsArrayBuffer = getNodeUtil && getNodeUtil.isArrayBuffer
+declare let Buffer:
+  | {
+    isBuffer: (a: any) => boolean;
+  }
+  | undefined;
 
 /**
- * Checks if `value` is classified as an `ArrayBuffer` object.
+ * Checks if the given value is a Buffer instance.
+ *
+ * This function tests whether the provided value is an instance of Buffer.
+ * It returns `true` if the value is a Buffer, and `false` otherwise.
+ *
+ * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `Buffer`.
  *
  * @category Is
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an array buffer, else `false`.
+ * @param {unknown} x - The value to check if it is a Buffer.
+ * @returns {boolean} Returns `true` if `x` is a Buffer, else `false`.
+ *
  * @example
+ * const buffer = Buffer.from("test");
+ * console.log(isBuffer(buffer)); // true
  *
- * isArrayBuffer(new ArrayBuffer(2))
- * // => true
- *
- * isArrayBuffer(new Array(2))
- * // => false
+ * const notBuffer = "not a buffer";
+ * console.log(isBuffer(notBuffer)); // false
  */
-export const isArrayBuffer = nodeIsArrayBuffer
-  ? (value: any) => nodeIsArrayBuffer(value)
-  : (value: any) => isObjectLike(value) && toTypeString(value) === '[object ArrayBuffer]'
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-const nativeIsBuffer = root?.Buffer?.isBuffer
-
-/**
- * Checks if `value` is a buffer.
- *
- * @category Is
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a buffer, else `false`.
- * @example
- *
- * isBuffer(Buffer.alloc(2))
- * // => true
- *
- * isBuffer(new Uint8Array(2))
- * // => false
- */
-export function isBuffer(value?: any): boolean {
-  if (typeof nativeIsBuffer === 'function')
-    return nativeIsBuffer(value)
-  else
-    return false
+export function isBuffer(x: unknown): boolean {
+  return typeof Buffer !== 'undefined' && Buffer.isBuffer(x);
 }

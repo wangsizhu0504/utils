@@ -1,41 +1,61 @@
-import toTypeString from '../_internal/toTypeString'
-import { isObjectLike } from './isObject'
-
 /**
- * Checks if `value` is a plain object, that is, an object created by the
- * `Object` constructor or one with a `[[Prototype]]` of `null`.
+ * Checks if a given value is a plain object.
  *
- * @category Is
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
+ * @param {object} value - The value to check.
+ * @returns {value is Record<PropertyKey, any>} - True if the value is a plain object, otherwise false.
+ *
  * @example
+ * ```typescript
+ * // ✅👇 True
  *
- * function Foo() {
- *   this.a = 1
- * }
+ * isPlainObject({ });                       // ✅
+ * isPlainObject({ key: 'value' });          // ✅
+ * isPlainObject({ key: new Date() });       // ✅
+ * isPlainObject(new Object());              // ✅
+ * isPlainObject(Object.create(null));       // ✅
+ * isPlainObject({ nested: { key: true} });  // ✅
+ * isPlainObject(new Proxy({}, {}));         // ✅
+ * isPlainObject({ [Symbol('tag')]: 'A' });  // ✅
  *
- * isPlainObject(new Foo)
- * // => false
+ * // ✅👇 (cross-realms, node context, workers, ...)
+ * const runInNewContext = await import('node:vm').then(
+ *     (mod) => mod.runInNewContext
+ * );
+ * isPlainObject(runInNewContext('({})'));   // ✅
  *
- * isPlainObject([1, 2, 3])
- * // => false
+ * // ❌👇 False
  *
- * isPlainObject({ 'x': 0, 'y': 0 })
- * // => true
- *
- * isPlainObject(Object.create(null))
- * // => true
+ * class Test { };
+ * isPlainObject(new Test())           // ❌
+ * isPlainObject(10);                  // ❌
+ * isPlainObject(null);                // ❌
+ * isPlainObject('hello');             // ❌
+ * isPlainObject([]);                  // ❌
+ * isPlainObject(new Date());          // ❌
+ * isPlainObject(new Uint8Array([1])); // ❌
+ * isPlainObject(Buffer.from('ABC'));  // ❌
+ * isPlainObject(Promise.resolve({})); // ❌
+ * isPlainObject(Object.create({}));   // ❌
+ * isPlainObject(new (class Cls {}));  // ❌
+ * isPlainObject(globalThis);          // ❌,
+ * ```
  */
-export function isPlainObject(value?: any): boolean {
-  if (!isObjectLike(value) || toTypeString(value) !== '[object Object]')
-    return false
+export function isPlainObject(value: unknown): value is Record<PropertyKey, any> {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
 
-  if (Object.getPrototypeOf(value) === null)
-    return true
+  const proto = Object.getPrototypeOf(value) as typeof Object.prototype | null;
 
-  let proto = value
-  while (Object.getPrototypeOf(proto) !== null)
-    proto = Object.getPrototypeOf(proto)
+  const hasObjectPrototype
+    = proto === null
+    || proto === Object.prototype
+    // Required to support node:vm.runInNewContext({})
+    || Object.getPrototypeOf(proto) === null;
 
-  return Object.getPrototypeOf(value) === proto
+  if (!hasObjectPrototype) {
+    return false;
+  }
+
+  return Object.prototype.toString.call(value) === '[object Object]';
 }

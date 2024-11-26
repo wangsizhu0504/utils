@@ -1,27 +1,16 @@
-import getNodeUtil from '../_internal/getNodeUtil'
-import toTypeString from '../_internal/toTypeString'
-import { isObjectLike } from './isObject'
-
-/* Node.js helper references. */
-const nodeIsRegExp = getNodeUtil && getNodeUtil.isRegExp
-
 /**
- * Checks if `value` is classified as a `RegExp` object.
+ * Checks if `value` is a RegExp.
  *
- * @category Is
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a regexp, else `false`.
+ * @param {unknown} value The value to check.
+ * @returns {value is RegExp} Returns `true` if `value` is a RegExp, `false` otherwise.
+ *
  * @example
+ * const value1 = /abc/;
+ * const value2 = '/abc/';
  *
- * isRegExp(/abc/)
- * // => true
- *
- * isRegExp('/abc/')
- * // => false
+ * console.log(isRegExp(value1)); // true
+ * console.log(isRegExp(value2)); // false
  */
-export function isRegExp(value?: any): value is RegExp {
-  if (nodeIsRegExp)
-    return nodeIsRegExp(value)
-  else
-    return isObjectLike(value) && toTypeString(value) === '[object RegExp]'
+export function isRegExp(value: unknown): value is RegExp {
+  return value instanceof RegExp;
 }

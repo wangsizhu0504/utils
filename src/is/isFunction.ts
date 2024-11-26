@@ -1,7 +1,6 @@
 /**
  * Checks if `value` is classified as a `Function` object.
  *
- * @category Is
  * @param {*} value The value to check.
  * @returns {boolean} Returns `true` if `value` is a function, else `false`.
  * @example
@@ -25,5 +24,5 @@
  * // => false
  */
 export function isFunction(value: any): value is (...args: any[]) => any {
-  return typeof value === 'function'
+  return typeof value === 'function';
 }

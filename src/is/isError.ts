@@ -1,32 +1,18 @@
-import toTypeString from '../_internal/toTypeString'
-import { isObjectLike } from './isObject'
-import { isPlainObject } from './isPlainObject'
+import { toRawType } from './toRawType';
 
 /**
- * Checks if `value` is an `Error`, `EvalError`, `RangeError`, `ReferenceError`,
- * `SyntaxError`, `TypeError`, or `URIError` object.
+ * Checks if `value` is an Error object.
  *
- * @category Is
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an error object, else `false`.
+ * @param {unknown} value The value to check.
+ * @returns {value is Error} Returns `true` if `value` is an Error object, `false` otherwise.
+ *
  * @example
- *
- * isError(new Error)
- * // => true
- *
- * isError(Error)
- * // => false
+ * ```typescript
+ * console.log(isError(new Error())); // true
+ * console.log(isError('Error')); // false
+ * console.log(isError({ name: 'Error', message: '' })); // false
+ * ```
  */
-export function isError(value: any): value is Error {
-  if (!isObjectLike(value))
-    return false
-
-  const tag = toTypeString(value)
-  return (
-    tag === '[object Error]'
-        || tag === '[object DOMException]'
-        || (typeof value.message === 'string'
-            && typeof value.name === 'string'
-            && !isPlainObject(value))
-  )
+export function isError(value?: unknown): value is Error {
+  return toRawType(value) === '[object Error]';
 }

@@ -1,27 +1,21 @@
-import getNodeUtil from '../_internal/getNodeUtil'
-import toTypeString from '../_internal/toTypeString'
-import { isObjectLike } from './isObject'
-
-/* Node.js helper references. */
-const nodeIsMap = getNodeUtil && getNodeUtil.isMap
-
 /**
- * Checks if `value` is classified as a `Map` object.
+ * Checks if a given value is `Map`.
  *
- * @category Is
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a map, else `false`.
+ * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `Map`.
+ *
+ * @param {unknown} value The value to check if it is a `Map`.
+ * @returns {value is Map<any, any>} Returns `true` if `value` is a `Map`, else `false`.
+ *
  * @example
+ * const value1 = new Map();
+ * const value2 = new Set();
+ * const value3 = new WeakMap();
  *
- * isMap(new Map)
- * // => true
- *
- * isMap(new WeakMap)
- * // => false
+ * console.log(isMap(value1)); // true
+ * console.log(isMap(value2)); // false
+ * console.log(isMap(value3)); // false
  */
-export function isMap(value?: any): value is Map<any, any> {
-  if (nodeIsMap)
-    return nodeIsMap(value)
-  else
-    return isObjectLike(value) && toTypeString(value) === '[object Map]'
+
+export function isMap(value: unknown): value is Map<any, any> {
+  return value instanceof Map;
 }

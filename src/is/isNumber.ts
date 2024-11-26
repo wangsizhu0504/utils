@@ -1,34 +1,20 @@
-import toTypeString from '../_internal/toTypeString'
-import { isObjectLike } from './isObject'
-
 /**
- * Checks if `value` is classified as a `Number` primitive or object.
+ * Checks if a given value is a number.
  *
- * **Note:** To exclude `Infinity`, `-Infinity`, and `NaN`, which are
- * classified as numbers, use the `Number.isFinite` method.
+ * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `number`.
  *
- * @category Is
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a number, else `false`.
- * @see isInteger, toInteger, toNumber
+ * @param {unknown} value The value to check if it is a number.
+ * @returns {value is number} Returns `true` if `value` is a number, else `false`.
+ *
  * @example
+ * const value1 = 123;
+ * const value2 = 'abc';
+ * const value3 = true;
  *
- * isNumber(3)
- * // => true
- *
- * isNumber(Number.MIN_VALUE)
- * // => true
- *
- * isNumber(Infinity)
- * // => true
- *
- * isNumber('3')
- * // => false
+ * console.log(isNumber(value1)); // true
+ * console.log(isNumber(value2)); // false
+ * console.log(isNumber(value3)); // false
  */
-export function isNumber(value?: any): value is number {
-  return (
-    typeof value === 'number'
-    || (isObjectLike(value)
-    && toTypeString(value) === '[object Number]')
-  )
+export function isNumber(value?: unknown): value is number {
+  return typeof value === 'number' || value instanceof Number;
 }

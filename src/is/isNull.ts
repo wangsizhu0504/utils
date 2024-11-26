@@ -1,56 +1,23 @@
 /**
- * Checks if `value` is `null`.
+ * Checks if the given value is null.
  *
- * @category Is
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is `null`, else `false`.
+ * This function tests whether the provided value is strictly equal to `null`.
+ * It returns `true` if the value is `null`, and `false` otherwise.
+ *
+ * This function can also serve as a type predicate in TypeScript, narrowing the type of the argument to `null`.
+ *
+ * @param {unknown} x - The value to test if it is null.
+ * @returns {x is null} True if the value is null, false otherwise.
+ *
  * @example
+ * const value1 = null;
+ * const value2 = undefined;
+ * const value3 = 42;
  *
- * isNull(null)
- * // => true
- *
- * isNull(void 0)
- * // => false
+ * console.log(isNull(value1)); // true
+ * console.log(isNull(value2)); // false
+ * console.log(isNull(value3)); // false
  */
-export function isNull(value?: any): value is null {
-  return value === null
-}
-
-/**
- * Checks if `value` is `null` or `undefined`.
- *
- * @category Is
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is nullish, else `false`.
- * @example
- *
- * isNil(null)
- * // => true
- *
- * isNil(void 0)
- * // => true
- *
- * isNil(NaN)
- * // => false
- */
-export function isNil(value?: any): value is null | undefined {
-  return value == null
-}
-
-/**
- * Checks if `value` is `undefined`.
- *
- * @category Is
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is `undefined`, else `false`.
- * @example
- *
- * isUndefined(void 0)
- * // => true
- *
- * isUndefined(null)
- * // => false
- */
-export function isUndefined(value?: any): value is undefined {
-  return value === undefined
+export function isNull(x: unknown): x is null {
+  return x === null;
 }
